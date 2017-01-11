@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <typeinfo>
 
 namespace cs50
 {
@@ -60,13 +61,21 @@ long long get_long_long(void)
 /**
  * TODO
  */
-std::string get_string(void)
+template <typename type>
+type get_string(void)
 {
     // TODO: check for failure
     // TODO: decide whether to return string or c_str
     std::string s;
     std::getline(std::cin, s);
-    return s;
+    
+    if (typeid(s) == typeid(type))
+    	return s;
+    
+    return s.c_str();
 }
+
+const char* (*get_c_string)(void) = get_string<const char*>;
+std::string (*get_cpp_string)(void) = get_string<std::string>;
 
 }
