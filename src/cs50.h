@@ -11,31 +11,38 @@ void eprintf();
 /**
  * TODO
  */
-char get_char(void);
+char get_char();
 
 /**
  * TODO
  */
-double get_double(void);
+double get_double();
 
 /**
  * TODO
  */
-float get_float(void);
+float get_float();
 
 /**
  * TODO
  */
-int get_int(void);
+int get_int();
 
 /**
  * TODO
  */
-long long get_long_long(void);
+long long get_long_long();
 
 /**
  * TODO
  */
-std::string get_string(void);
+template<typename type>
+type get_string();
+
+template<>
+char* get_string();
+
+extern std::string (*get_cpp_string)();
+extern char* (*get_c_string)();
 
 }

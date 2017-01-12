@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-#include <typeinfo>
+
+#include "cs50.h"
 
 namespace cs50
 {
@@ -16,7 +17,7 @@ void eprintf()
 /**
  * TODO
  */
-char get_char(void)
+char get_char()
 {
     // TODO
     return '\0';
@@ -25,7 +26,7 @@ char get_char(void)
 /**
  * TODO
  */
-double get_double(void)
+double get_double()
 {
     // TODO
     return 0.0;
@@ -34,7 +35,7 @@ double get_double(void)
 /**
  * TODO
  */
-float get_float(void)
+float get_float()
 {
     // TODO
     return 0.0;
@@ -43,7 +44,7 @@ float get_float(void)
 /**
  * TODO
  */
-int get_int(void)
+int get_int()
 {
     // TODO
     return 0;
@@ -52,7 +53,7 @@ int get_int(void)
 /**
  * TODO
  */
-long long get_long_long(void)
+long long get_long_long()
 {
     // TODO
     return 0;
@@ -61,21 +62,29 @@ long long get_long_long(void)
 /**
  * TODO
  */
-template <typename type>
-type get_string(void)
+template<typename type>
+type get_string()
 {
     // TODO: check for failure
-    // TODO: decide whether to return string or c_str
     std::string s;
     std::getline(std::cin, s);
     
-    if (typeid(s) == typeid(type))
-    	return s;
     
-    return s.c_str();
+    return s;
 }
 
-const char* (*get_c_string)(void) = get_string<const char*>;
-std::string (*get_cpp_string)(void) = get_string<std::string>;
+template<>
+char* get_string()
+{
+    // TODO: check for failure
+    std::string s;
+    std::getline(std::cin, s);
+    
+    
+    return (char*)s.c_str();
+}
+
+std::string (*get_cpp_string)() = get_string;
+char* (*get_c_string)() = get_string;
 
 }
