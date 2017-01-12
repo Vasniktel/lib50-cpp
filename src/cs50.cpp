@@ -73,6 +73,9 @@ type get_string()
     return s;
 }
 
+/**
+ * TODO
+ */
 template<>
 char* get_string()
 {
